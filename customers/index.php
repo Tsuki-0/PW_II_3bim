@@ -34,7 +34,7 @@
             <tr>
                 <th>ID</th>
                 <th width="30%">Nome</th>
-                <th>CPF/CNPJ</th>
+                <th>COREN</th>
                 <th>Telefone</th>
                 <th>Atualizado em</th>
                 <th>Opções</th>
@@ -47,7 +47,7 @@
                     <tr>
                         <td><?php echo $customer['id']; ?></td>
                         <td><?php echo $customer['name']; ?></td>
-                        <td><?php echo $customer['cpf_cnpj']; ?></td>
+                        <td><?php echo $customer['ie']; ?></td>
                         <td><?php echo telefone($customer['phone']); ?></td>
                         <td>
                             <?php 
