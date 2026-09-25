@@ -7,10 +7,10 @@
 <header>
     <div class="row">
         <div class="col-sm-6">
-            <h1>Clientes</h1>
+            <h1>Enfermeiros</h1>
         </div>
         <div class="col-sm-6 text-end h2">
-            <a class="btn btn-crud-primary" href="add.php"><i class="fa-solid fa-user-plus"></i> Novo Cliente</a>
+            <a class="btn btn-crud-primary" href="add.php"><i class="fa-solid fa-user-plus"></i> Novo Enfermeiro</a>
             <a class="btn btn-crud-secondary" href="index.php"><i class="fa-solid fa-refresh"></i> Atualizar</a>
         </div>
     </div>

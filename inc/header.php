@@ -189,14 +189,14 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle clientes-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                            <i class="fa-solid fa-user-group"></i> Clientes
+                            <i class="fa-solid fa-user-group"></i> Enfermeiros
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="<?php echo BASEURL; ?>customers"><i
-                                        class="fa-solid fa-user-group"></i> Gerenciar Clientes</a>
+                                        class="fa-solid fa-user-group"></i> Gerenciar Enfermeiros</a>
                             </li>
                             <li><a class="dropdown-item" href="<?php echo BASEURL; ?>customers/add.php"><i
-                                        class="fa-solid fa-user-plus"></i> Novo Cliente</a>
+                                        class="fa-solid fa-user-plus"></i> Novo Enfermeiro</a>
                             </li>
                         </ul>
                     </li>
