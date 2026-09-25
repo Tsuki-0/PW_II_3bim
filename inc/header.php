@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>CRUD com Bootstrap</title>
+    <title>Gestão de enfermeiros</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="keywords" content="">
