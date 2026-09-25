@@ -46,15 +46,14 @@ include HEADER_TEMPLATE;
                 <span class="photo-upload-label">Clique para selecionar</span>
                 <span class="photo-upload-hint">JPG, PNG, WEBP ou GIF · máx. recomendado 5MB</span>
             </label>
-            <input type="file" id="foto" name="foto" accept="image/png, image/jpeg, image/webp, image/gif"
+            <input type="file" id="foto" name="customer['foto']" accept="image/png, image/jpeg, image/webp, image/gif"
                 style="display: none;">
         </div>
 
         <div class="form-group">
-            <label>Pré-visualização</label>
+            <label>Foto Atual</label>
             <div class="photo-preview" id="foto-preview">
-                <i class="fa-regular fa-image"></i>
-                <span>Sem Imagem</span>
+                <img src="img/<?= $customer['foto'] ?>" id="preview" class="foto-preview" alt="foto atual">
             </div>
         </div>
 
