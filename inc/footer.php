@@ -1,7 +1,6 @@
-    <hr>
-    </main> <!-- /container -->
+</main> <!-- /container -->
 
-    <footer class="container">
+    <footer class="site-footer text-center">
         <?php $dt = new DateTime("now", new DateTimeZone("America/Sao_Paulo")); ?>
         <p>&copy;2026 à <?= $dt->format("Y")?> - Felipe Rafael e Felipe Avelino</p>
     </footer>

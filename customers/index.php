@@ -7,11 +7,11 @@
 <header>
     <div class="row">
         <div class="col-sm-6">
-            <h2>Clientes</h2>
+            <h1>Clientes</h1>
         </div>
         <div class="col-sm-6 text-end h2">
-            <a class="btn btn-secondary" href="add.php"><i class="fa-solid fa-user-plus"></i> Novo Cliente</a>
-            <a class="btn btn-light" href="index.php"><i class="fa-solid fa-refresh"></i> Atualizar</a>
+            <a class="btn btn-crud-primary" href="add.php"><i class="fa-solid fa-user-plus"></i> Novo Cliente</a>
+            <a class="btn btn-crud-secondary" href="index.php"><i class="fa-solid fa-refresh"></i> Atualizar</a>
         </div>
     </div>
 </header>
@@ -28,51 +28,53 @@
 
 <hr>
 
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th width="30%">Nome</th>
-            <th>CPF/CNPJ</th>
-            <th>Telefone</th>
-            <th>Atualizado em</th>
-            <th>Opções</th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- Os dois pontos ":" indica se vai mostrar o que vira depois-->
-        <?php if ($customers): ?>
-            <?php foreach ($customers as $customer): ?> 
-                <tr>
-                    <td><?php echo $customer['id']; ?></td>
-                    <td><?php echo $customer['name']; ?></td>
-                    <td><?php echo $customer['cpf_cnpj']; ?></td>
-                    <td><?php echo telefone($customer['phone']); ?></td>
-                    <td>
-                        <?php 
-                            $dt = new DateTime($customer['modified'], new DateTimeZone("America/Sao_Paulo"));
-                            echo $dt->format("d/m/Y - H:i:s"); 
-                        ?>
-                    </td>
-                    <td class="actions text-end">
-                        <a href="view.php?id=<?php echo $customer['id']; ?>" class="btn btn-sm btn-light"><i
-                                class="fa fa-eye"></i> Visualizar</a>
-                        <a href="edit.php?id=<?php echo $customer['id']; ?>" class="btn btn-sm btn-secondary"><i
-                                class="fa fa-pencil"></i> Editar</a>
-                        <a href="#" class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#delete-modal"
-                            data-customer="<?= $customer['id']; ?>">
-                            <i class="fa fa-trash"></i> Excluir
-                        </a>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        <?php else: ?>
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
             <tr>
-                <td colspan="6">Nenhum registro encontrado.</td>
+                <th>ID</th>
+                <th width="30%">Nome</th>
+                <th>CPF/CNPJ</th>
+                <th>Telefone</th>
+                <th>Atualizado em</th>
+                <th>Opções</th>
             </tr>
-        <?php endif; ?>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            <!-- Os dois pontos ":" indica se vai mostrar o que vira depois-->
+            <?php if ($customers): ?>
+                <?php foreach ($customers as $customer): ?> 
+                    <tr>
+                        <td><?php echo $customer['id']; ?></td>
+                        <td><?php echo $customer['name']; ?></td>
+                        <td><?php echo $customer['cpf_cnpj']; ?></td>
+                        <td><?php echo telefone($customer['phone']); ?></td>
+                        <td>
+                            <?php 
+                                $dt = new DateTime($customer['modified'], new DateTimeZone("America/Sao_Paulo"));
+                                echo $dt->format("d/m/Y - H:i:s"); 
+                            ?>
+                        </td>
+                        <td class="actions text-end">
+                            <a href="view.php?id=<?php echo $customer['id']; ?>" class="btn btn-sm btn-crud-view"><i
+                                    class="fa fa-eye"></i> Visualizar</a>
+                            <a href="edit.php?id=<?php echo $customer['id']; ?>" class="btn btn-sm btn-crud-edit"><i
+                                    class="fa fa-pencil"></i> Editar</a>
+                            <a href="#" class="btn btn-sm btn-crud-delete" data-bs-toggle="modal" data-bs-target="#delete-modal"
+                                data-customer="<?= $customer['id']; ?>">
+                                <i class="fa fa-trash"></i> Excluir
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <tr>
+                    <td colspan="6">Nenhum registro encontrado.</td>
+                </tr>
+            <?php endif; ?>
+        </tbody>
+    </table>
+</div>
 
 <?php include "modal.php"; ?>
 <?php include FOOTER_TEMPLATE; ?>

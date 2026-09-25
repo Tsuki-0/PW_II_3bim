@@ -19,7 +19,7 @@ if ( !defined('ABSPATH') )
 	
 /** caminho no server para o sistema **/
 if ( !defined('BASEURL') )
-	define('BASEURL', '/crud-bootstrap-php/'); //raiz do projeto. trocar para "/" quando hospedado
+	define('BASEURL', '/PW_II_3bim/'); //raiz do projeto. trocar para "/" quando hospedado
 	
 /** caminho do arquivo de banco de dados **/
 if ( !defined('DBAPI') )

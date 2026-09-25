@@ -16,33 +16,18 @@ try {
 
 <?php if (!$erro): ?>
 
-	<div class="row">
-		<div class="col-xs-6 col-sm-3 col-md-2">
-			<a href="customers/add.php" class="btn btn-secondary">
-				<div class="row">
-					<div class="col-xs-12 text-center">
-						<i class="fa-solid fa-user-plus fa-5x"></i>
-					</div>
-					<div class="col-xs-12 text-center">
-						<p>Novo Cliente</p>
-					</div>
-				</div>
-			</a>
-		</div>
+	<div class="action-grid">
+		<a href="customers/add.php" class="action-card action-card--primary">
+			<i class="fa-solid fa-user-plus"></i>
+			<p>Novo Enfermeiro</p>
+		</a>
 
-		<div class="col-xs-6 col-sm-3 col-md-2">
-			<a href="customers" class="btn btn-light">
-				<div class="row">
-					<div class="col-xs-12 text-center">
-						<i class="fa fa-user-group fa-5x"></i>
-					</div>
-					<div class="col-xs-12 text-center">
-						<p>Clientes</p>
-					</div>
-				</div>
-			</a>
-		</div>
+		<a href="customers" class="action-card">
+			<i class="fa-solid fa-user-group"></i>
+			<p>Enfermeiros</p>
+		</a>
 	</div>
+	
 
 <?php else: ?>
 	<div class="alert alert-danger" role="alert">
