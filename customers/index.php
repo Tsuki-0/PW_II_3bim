@@ -42,26 +42,26 @@
         </thead>
         <tbody>
             <!-- Os dois pontos ":" indica se vai mostrar o que vira depois-->
-            <?php if ($customers): ?>
-                <?php foreach ($customers as $customer): ?> 
+            <?php if ($enfermeiros): ?>
+                <?php foreach ($enfermeiros as $enfermeiro): ?> 
                     <tr>
-                        <td><?php echo $customer['id']; ?></td>
-                        <td><?php echo $customer['name']; ?></td>
-                        <td><?php echo $customer['ie']; ?></td>
-                        <td><?php echo telefone($customer['phone']); ?></td>
+                        <td><?php echo $enfermeiro['id']; ?></td>
+                        <td><?php echo $enfermeiro['name']; ?></td>
+                        <td><?php echo $enfermeiro['coren']; ?></td>
+                        <td><?php echo telefone($enfermeiro['phone']); ?></td>
                         <td>
                             <?php 
-                                $dt = new DateTime($customer['modified'], new DateTimeZone("America/Sao_Paulo"));
+                                $dt = new DateTime($enfermeiro['modified'], new DateTimeZone("America/Sao_Paulo"));
                                 echo $dt->format("d/m/Y - H:i:s"); 
                             ?>
                         </td>
                         <td class="actions text-end">
-                            <a href="view.php?id=<?php echo $customer['id']; ?>" class="btn btn-sm btn-crud-view"><i
+                            <a href="view.php?id=<?php echo $enfermeiro['id']; ?>" class="btn btn-sm btn-crud-view"><i
                                     class="fa fa-eye"></i> Visualizar</a>
-                            <a href="edit.php?id=<?php echo $customer['id']; ?>" class="btn btn-sm btn-crud-edit"><i
+                            <a href="edit.php?id=<?php echo $enfermeiro['id']; ?>" class="btn btn-sm btn-crud-edit"><i
                                     class="fa fa-pencil"></i> Editar</a>
                             <a href="#" class="btn btn-sm btn-crud-delete" data-bs-toggle="modal" data-bs-target="#delete-modal"
-                                data-customer="<?= $customer['id']; ?>">
+                                data-enfermeiro="<?= $enfermeiro['id']; ?>">
                                 <i class="fa fa-trash"></i> Excluir
                             </a>
                         </td>

@@ -16,21 +16,21 @@ include HEADER_TEMPLATE;
         </div>
 
         <div class="form-group">
-            <label for="address">Endereço</label>
+            <label for="address">CEP</label>
             <input type="text" class="form-control" id="address" name="customer['address']"
-                placeholder="Ex: Rua das Flores, 123 — São Paulo/SP">
+                placeholder="Ex: 12345-678" oninput="cep(this)">
         </div>
 
         <div class="form-group">
             <label for="ie">COREN</label>
-            <input type="text" class="form-control" id="ie" name="customer['ie']" maxlength="15"
+            <input type="text" class="form-control" id="ie" name="customer['ie']" maxlength="7"
                 placeholder="Ex: 123456">
         </div>
 
         <div class="form-group">
             <label for="phone">Telefone</label>
             <input type="text" class="form-control" id="phone" name="customer['phone']" maxlength="15"
-                placeholder="Ex: (11) 91234-5678">
+                placeholder="Ex: (11) 91234-5678" oninput="telefone(this)">
         </div>
 
         <div class="form-group">
