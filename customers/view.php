@@ -6,65 +6,90 @@ view($_GET['id']);
 include(HEADER_TEMPLATE);
 ?>
 
-<h2>Cliente <?php echo $customer['id']; ?></h2>
-<hr>
 
-<?php if (!empty($_SESSION['message'])): ?>
-    <div class="alert alert-<?php echo $_SESSION['type']; ?>"><?php echo $_SESSION['message']; ?></div>
-<?php endif; ?>
+<h1 style="text-align: center;">Cliente <?php echo $customer['id']; ?></h1>
 
-<dl class="dl-horizontal">
-    <dt>Nome / Razão Social:</dt> <!-- titulo -->
-    <dd><?php echo $customer['name']; ?></dd>
+<div class="form-scroll">
+    <form class="form-card">
+        <!-- area de campos do form, somente para visualizacao -->
+        <div class="form-group">
+            <label for="name">Nome completo</label>
+            <input type="text" class="form-control" id="name" name="customer['name']"
+                value="<?php echo $customer['name']; ?>" disabled>
+        </div>
 
-    <dt>CPF / CNPJ:</dt>
-    <dd><?php echo $customer['cpf_cnpj']; ?></dd>
+        <div class="form-group">
+            <label for="address">Endereço</label>
+            <input type="text" class="form-control" id="address" name="customer['address']"
+                value="<?php echo $customer['address']; ?>" disabled>
+        </div>
 
-    <dt>Data de Nascimento:</dt>
-    <dd><?php echo formatData($customer['birthdate'], "d/m/Y"); ?></dd>
-</dl>
+        <div class="form-group">
+            <label for="ie">COREN</label>
+            <input type="text" class="form-control" id="ie" name="customer['ie']" maxlength="15"
+                value="<?php echo $customer['ie']; ?>" disabled>
+        </div>
 
-<dl class="dl-horizontal">
-    <dt>Endereço:</dt>
-    <dd><?php echo $customer['address']; ?></dd>
+        <div class="form-group">
+            <label for="phone">Telefone</label>
+            <input type="text" class="form-control" id="phone" name="customer['phone']" maxlength="15"
+                value="<?php echo $customer['phone']; ?>" disabled>
+        </div>
 
-    <dt>Bairro:</dt>
-    <dd><?php echo $customer['hood']; ?></dd>
+        <div class="form-group">
+            <label for="birthdate">Data de Nascimento</label>
+            <input type="text" class="form-control" id="birthdate" name="customer['birthdate']"
+                value="<?php echo $customer['birthdate']; ?>" disabled>
+        </div>
 
-    <dt>CEP:</dt>
-    <dd><?php echo cep($customer['zip_code']); ?></dd>
+        <div class="form-group">
+            <label>Foto Atual</label>
+            <div class="photo-preview" id="foto-preview">
+                <?php if (!empty($customer['foto'])): ?>
+                    <img src="<?php echo IMG_URL . $customer['foto']; ?>" alt="Foto atual">
+                <?php else: ?>
+                    <i class="fa-regular fa-image"></i>
+                    <span>Sem Imagem</span>
+                <?php endif; ?>
+            </div>
+        </div>
 
-    <dt>Data de Cadastro:</dt>
-    <dd><?php echo formatData($customer['created'], "d/m/Y : H:i:s"); ?></dd>
-
-    <dt>Data da última atualização:</dt>
-    <dd><?php echo formatData($customer['modified'], "d/m/Y - H:i:s"); ?></dd>
-</dl>
-
-<dl class="dl-horizontal">
-    <dt>Cidade:</dt>
-    <dd><?php echo $customer['city']; ?></dd>
-
-    <dt>Telefone:</dt>
-    <dd><?php echo telefone($customer['phone']); ?></dd>
-
-    <dt>Celular:</dt>
-    <dd><?php echo telefone($customer['mobile']); ?></dd>
-
-    <dt>UF:</dt>
-    <dd><?php echo $customer['state']; ?></dd>
-
-    <dt>Inscrição Estadual:</dt>
-    <dd><?php echo number_format($customer['ie'], 0, ",", "."); ?></dd>
-</dl>
-
-<div id="actions" class="row">
-    <div class="col-md-12">
-        <a href="edit.php?id=<?php echo $customer['id']; ?>" class="btn btn-secondary"><i
-                class="fa-solid fa-pen-to-square"></i> Editar</a>
-        <a href="index.php" class="btn btn-light"><i class="fa-solid fa-arrow-rotate-left"></i> Voltar</a>
-    </div>
-
+        <div id="actions">
+            <a href="index.php" class="btn btn-crud-secondary">
+                <i class="fa-solid fa-rotate-left"></i> Voltar
+            </a>
+            <a href="edit.php?id=<?php echo $customer['id']; ?>" class="btn btn-crud-primary">
+                <i class="fa-solid fa-pencil"></i> Editar
+            </a>
+        </div>
+    </form>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Formata o telefone como (11) 91234-5678 ou (11) 1234-5678
+        var phone = document.getElementById('phone');
+        if (phone && phone.value) {
+            var digits = phone.value.replace(/\D/g, '');
+            var formatted = digits;
+            if (digits.length === 11) {
+                formatted = digits.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+            } else if (digits.length === 10) {
+                formatted = digits.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+            }
+            phone.value = formatted;
+        }
+
+        // Converte a data de aaaa-mm-dd para o padrao brasileiro dd/mm/aaaa
+        var birthdate = document.getElementById('birthdate');
+        if (birthdate && birthdate.value) {
+            var raw = birthdate.value.split(' ')[0];
+            var parts = raw.split('-');
+            if (parts.length === 3) {
+                birthdate.value = parts[2] + '/' + parts[1] + '/' + parts[0];
+            }
+        }
+    });
+</script>
 
 <?php include FOOTER_TEMPLATE; ?>

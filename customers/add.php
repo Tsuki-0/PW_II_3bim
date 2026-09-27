@@ -4,7 +4,7 @@ add();
 include HEADER_TEMPLATE;
 ?>
 
-<h1>Novo Enfermeiro</h1>
+<h1 style="text-align: center;">Novo Enfermeiro</h1>
 
 <div class="form-scroll">
     <form action="add.php" method="post" enctype="multipart/form-data" class="form-card">
@@ -45,7 +45,7 @@ include HEADER_TEMPLATE;
                 <span class="photo-upload-label">Clique para selecionar</span>
                 <span class="photo-upload-hint">JPG, PNG, WEBP ou GIF · máx. recomendado 5MB</span>
             </label>
-            <input type="file" id="foto" name="customer['foto']" accept="image/png, image/jpeg, image/webp, image/gif"
+            <input type="file" id="foto" name="foto" accept="image/png, image/jpeg, image/webp, image/gif"
                 style="display: none;">
         </div>
 

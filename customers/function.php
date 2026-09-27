@@ -66,6 +66,14 @@ function add()
 		$customer['modified'] = $customer['created'] = $today->format("Y-m-d H:i:s");
 		//modified e created são posições que serão adiconadas dentro do array $customer
 
+		try {
+			$customer['foto'] = uploadFoto($_FILES['foto'] ?? null);
+		} catch (Exception $e) {
+			$_SESSION['message'] = $e->getMessage();
+			$_SESSION['type'] = 'danger';
+			return; // nao salva o cliente se a foto enviada for invalida
+		}
+
 		save('customers', $customer); // 'customers' -> nome da tabela; $customer -> associative array
 		header('location: index.php'); // output buffer
 	}
@@ -84,8 +92,27 @@ function edit() {
 
     if (isset($_POST['customer'])) {
 
+      global $customer;
+      $atual = find("customers", $id); // dados que ja estavam salvos, incluindo a foto antiga
+
       $customer = $_POST['customer'];
       $customer['modified'] = $now->format("Y-m-d H:i:s");
+
+      try {
+        $novaFoto = uploadFoto($_FILES['foto'] ?? null);
+      } catch (Exception $e) {
+        $_SESSION['message'] = $e->getMessage();
+        $_SESSION['type'] = 'danger';
+        $customer = $atual; // devolve os dados atuais pra tela nao ficar em branco
+        return;
+      }
+
+      if ($novaFoto) {
+        deletarFoto($atual['foto'] ?? null); // so apaga a antiga se uma nova foi enviada
+        $customer['foto'] = $novaFoto;
+      } else {
+        $customer['foto'] = $atual['foto'] ?? null; // mantem a foto que ja existia
+      }
 
       update("customers", $id, $customer);
       header("location: index.php");
@@ -105,11 +132,21 @@ function edit() {
 function delete($id = null) {
 
   global $customer;
-  $customer = remove('customers', $id);
+  $customer = find('customers', $id); // busca os dados (inclusive a foto) antes de excluir
+
+  if ($customer) {
+    deletarFoto($customer['foto'] ?? null);
+  }
+
+  remove('customers', $id);
 
   header("location: index.php");
 }
 function redimensionarImagem($origem, $destino, $larguraMax = 300) {
+    if (!extension_loaded('gd')) {
+        throw new Exception("A extensão GD do PHP não está ativada no servidor. Ative 'extension=gd' no php.ini e reinicie o Apache.");
+    }
+
     $info = getimagesize($origem);
     if (!$info) {
         throw new Exception("Não foi possível ler a imagem.");
@@ -162,3 +199,64 @@ imagedestroy($src);
     imagedestroy($nova);
 }
 
+/**
+ *  Faz o upload de uma foto: valida, redimensiona e salva na pasta img/.
+ *  Retorna o nome do arquivo salvo, ou null se nenhum arquivo foi enviado.
+ */
+function uploadFoto($arquivo)
+{
+	// Nenhum arquivo enviado (ex: usuario nao trocou a foto na edicao)
+	if (empty($arquivo) || empty($arquivo['name']) || $arquivo['error'] === UPLOAD_ERR_NO_FILE) {
+		return null;
+	}
+
+	if ($arquivo['error'] !== UPLOAD_ERR_OK) {
+		throw new Exception("Erro ao enviar a imagem.");
+	}
+
+	if (!is_uploaded_file($arquivo['tmp_name'])) {
+		throw new Exception("Upload inválido.");
+	}
+
+	$extensoesPermitidas = [
+		'image/jpeg' => 'jpg',
+		'image/png'  => 'png',
+		'image/webp' => 'webp',
+		'image/gif'  => 'gif',
+	];
+
+	$tipo = mime_content_type($arquivo['tmp_name']);
+	if (!isset($extensoesPermitidas[$tipo])) {
+		throw new Exception("Formato de imagem não permitido. Use JPG, PNG, WEBP ou GIF.");
+	}
+
+	$tamanhoMaximo = 5 * 1024 * 1024; // 5MB
+	if ($arquivo['size'] > $tamanhoMaximo) {
+		throw new Exception("A imagem deve ter no máximo 5MB.");
+	}
+
+	if (!is_dir(IMG_DIR)) {
+		mkdir(IMG_DIR, 0755, true);
+	}
+
+	$nomeUnico = uniqid('foto_', true) . '.' . $extensoesPermitidas[$tipo];
+	redimensionarImagem($arquivo['tmp_name'], IMG_DIR . $nomeUnico, 300);
+
+	return $nomeUnico;
+}
+
+/**
+ *  Remove do disco a foto de um cliente, se existir.
+ */
+function deletarFoto($nomeArquivo)
+{
+	if (empty($nomeArquivo)) {
+		return;
+	}
+
+	$caminho = IMG_DIR . $nomeArquivo;
+
+	if (is_file($caminho)) {
+		unlink($caminho);
+	}
+}
