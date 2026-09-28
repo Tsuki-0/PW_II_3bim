@@ -4,7 +4,7 @@ edit();
 include HEADER_TEMPLATE;
 ?>
 
-<h1 style="text-align: center;">Atualizar Cliente</h1>
+<h1 style="text-align: center;" class="titulo-modal">Atualizar Enfermeiro</h1>
 
 <?php // Mostra o erro de upload (edit() nao redireciona quando a foto e invalida) ?>
 <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_SESSION['message'])): ?>

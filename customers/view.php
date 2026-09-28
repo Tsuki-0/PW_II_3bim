@@ -7,7 +7,7 @@ include(HEADER_TEMPLATE);
 ?>
 
 
-<h1 style="text-align: center;">Cliente <?php echo $customer['id']; ?></h1>
+<h1 style="text-align: center;">Enfermeiro <?php echo $customer['id']; ?></h1>
 
 <div class="form-scroll">
     <form class="form-card">

@@ -18,7 +18,7 @@
         padding: 1.1rem 1.5rem;
     }
 
-    .modal-title {
+    .titulo-modal {
         font-size: 1.15rem;
         font-weight: 700;
         color: var(--slate);
@@ -89,12 +89,12 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="modalLabel">Excluir Item</h4>
+                <h4 class="titulo-modal" id="modalLabel">Excluir Enfermeiro</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <span class="modal-icon"><i class="fa-solid fa-triangle-exclamation"></i></span>
-                <p class="mb-0">Deseja realmente excluir este item?</p>
+                <p class="mb-0">Deseja realmente excluir este Enfermeiro?</p>
             </div>
             <div class="modal-footer">
                 <a id="confirm" class="btn btn-crud-danger" href="#">
