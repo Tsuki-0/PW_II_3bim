@@ -19,20 +19,20 @@ include(HEADER_TEMPLATE);
         </div>
 
         <div class="form-group">
-            <label for="address">Endereço</label>
-            <input type="text" class="form-control" id="address" name="customer['address']"
-                value="<?php echo $customer['address']; ?>" disabled>
+            <label for="cep">CEP</label>
+            <input type="text" class="form-control" id="cep" name="customer['cep']"
+                value="<?php echo $customer['cep']; ?>" disabled>
         </div>
 
         <div class="form-group">
-            <label for="ie">COREN</label>
-            <input type="text" class="form-control" id="ie" name="customer['ie']" maxlength="15"
-                value="<?php echo $customer['ie']; ?>" disabled>
+            <label for="coren">COREN</label>
+            <input type="text" class="form-control" id="coren" name="customer['coren']"
+                value="<?php echo $customer['coren']; ?>" disabled>
         </div>
 
         <div class="form-group">
             <label for="phone">Telefone</label>
-            <input type="text" class="form-control" id="phone" name="customer['phone']" maxlength="15"
+            <input type="text" class="form-control" id="phone" name="customer['phone']"
                 value="<?php echo $customer['phone']; ?>" disabled>
         </div>
 
@@ -67,6 +67,15 @@ include(HEADER_TEMPLATE);
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        // CEP: 12345678 -> 12345-678
+        var cep = document.getElementById('cep');
+        if (cep && cep.value) {
+            var c = cep.value.replace(/\D/g, '');
+            if (c.length === 8) {
+                cep.value = c.replace(/(\d{5})(\d{3})/, '$1-$2');
+            }
+        }
+
         // Formata o telefone como (11) 91234-5678 ou (11) 1234-5678
         var phone = document.getElementById('phone');
         if (phone && phone.value) {

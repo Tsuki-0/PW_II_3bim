@@ -1,6 +1,10 @@
 <?php
 ob_start(); //output buffer aberto, para não dar erro de header location
 
+if (session_status() === PHP_SESSION_NONE) {
+	session_start(); // necessario para os alertas em $_SESSION['message'] funcionarem
+}
+
 include('../config.php');
 include(DBAPI);
 
