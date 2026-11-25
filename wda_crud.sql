@@ -1,3 +1,6 @@
+create database if not exists pw_II_3bim;
+use pw_II_3bim;
+
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
@@ -18,12 +21,11 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `wda_crud`
+-- Database: `pw_II_3bim`
 --
 
 -- --------------------------------------------------------
 
---
 -- Table structure for table `customers`
 --
 

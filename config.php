@@ -1,5 +1,5 @@
 <?php
-const DB_NAME = "wda_crud";
+const DB_NAME = "pw_II_3bim";
 
 define('DB_USER', 'root');
 
